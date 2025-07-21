@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://baa5clgtnhwb4"]
+
+[ext_resource type="Script" uid="uid://cbva65c2wvafr" path="res://main_script.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://qplpqentaj5a" path="res://cubo.tscn" id="1_ig7tw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
+sky_top_color = Color(0.827007, 0.42932, 0.725645, 1)
+sky_horizon_color = Color(1.37395, 1.17444, 1.3107, 1)
+ground_bottom_color = Color(0.894448, 0.494082, 0.742795, 1)
+ground_horizon_color = Color(1.37395, 1.17444, 1.3107, 1)
+
+[sub_resource type="Sky" id="Sky_ig7tw"]
+sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_ig7tw")
+glow_enabled = true
+
+[node name="main" type="Node3D"]
+script = ExtResource("1_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.95739)
+light_energy = 0.8
+directional_shadow_mode = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0xm2m")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.24149)
+far = 78.43
+
+[node name="Cubo" parent="." instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85555, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.7
+autostart = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 21.0
+offset_top = 17.0
+offset_right = 61.0
+offset_bottom = 57.0
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -7.0
+offset_right = 175.0
+offset_bottom = 33.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 125.0
+offset_bottom = 23.0
+text = "Cubos Clicados: "
+
+[node name="numeros" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 1.0
+offset_right = 189.0
+offset_bottom = 24.0
+text = "0"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://qplpqentaj5a"]
+
+[ext_resource type="Script" uid="uid://d2jjk5v2wnbf4" path="res://cubo.gd" id="1_vveh1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
+size = Vector3(0.6, 0.6, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+albedo_color = Color(2.02149e-06, 0.721786, 0.409999, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
+
+[node name="Cubo" type="RigidBody3D"]
+gravity_scale = 0.3
+script = ExtResource("1_vveh1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_7dm0k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_ig7tw")
+mesh = SubResource("BoxMesh_0xm2m")
+skeleton = NodePath("../CollisionShape3D")
