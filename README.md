@@ -7,7 +7,7 @@ Cada jogo está organizado em sua própria pasta, com o código-fonte completo, 
 
 ```
 /
-├── toque-nos-cubos/
+├── toque-nos-cubos = GPT PROJETO 1
 ├── cubo-corredor/
 ├── cubinho-aventuras/
 ├── alvo-cubico/
