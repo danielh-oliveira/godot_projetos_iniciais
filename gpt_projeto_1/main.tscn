@@ -1,13 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://baa5clgtnhwb4"]
+[gd_scene load_steps=8 format=3 uid="uid://baa5clgtnhwb4"]
 
 [ext_resource type="Script" uid="uid://cbva65c2wvafr" path="res://main_script.gd" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://qplpqentaj5a" path="res://cubo.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://bm5cwq1j6lbmd" path="res://boasorte.tscn" id="2_0xm2m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_top_color = Color(0.827007, 0.42932, 0.725645, 1)
-sky_horizon_color = Color(1.37395, 1.17444, 1.3107, 1)
+sky_horizon_color = Color(0.894118, 0.494118, 0.745098, 1)
 ground_bottom_color = Color(0.894448, 0.494082, 0.742795, 1)
-ground_horizon_color = Color(1.37395, 1.17444, 1.3107, 1)
+ground_horizon_color = Color(0.894118, 0.494118, 0.741176, 1)
 
 [sub_resource type="Sky" id="Sky_ig7tw"]
 sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
@@ -16,6 +16,12 @@ sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
 background_mode = 2
 sky = SubResource("Sky_ig7tw")
 glow_enabled = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_0xm2m"]
+font_size = 36
+
+[sub_resource type="LabelSettings" id="LabelSettings_h2yge"]
+font_size = 36
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_0xm2m")
@@ -32,40 +38,41 @@ environment = SubResource("Environment_0xm2m")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.24149)
 far = 78.43
 
-[node name="Cubo" parent="." instance=ExtResource("1_ig7tw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85555, 0)
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.7
 autostart = true
 
-[node name="Control" type="Control" parent="."]
+[node name="info cliques" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 21.0
-offset_top = 17.0
-offset_right = 61.0
-offset_bottom = 57.0
+offset_left = 19.0
+offset_top = 62.0
+offset_right = 59.0
+offset_bottom = 102.0
 
-[node name="Panel" type="Panel" parent="Control"]
+[node name="Panel" type="Panel" parent="info cliques"]
 layout_mode = 0
 offset_left = -9.0
 offset_top = -7.0
-offset_right = 175.0
-offset_bottom = 33.0
+offset_right = 360.0
+offset_bottom = 66.0
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Label" type="Label" parent="info cliques"]
 layout_mode = 0
 offset_right = 125.0
 offset_bottom = 23.0
 text = "Cubos Clicados: "
+label_settings = SubResource("LabelSettings_0xm2m")
 
-[node name="numeros" type="Label" parent="Control"]
+[node name="numeros" type="Label" parent="info cliques"]
 layout_mode = 0
-offset_left = 126.0
+offset_left = 284.0
 offset_top = 1.0
-offset_right = 189.0
-offset_bottom = 24.0
+offset_right = 347.0
+offset_bottom = 51.0
 text = "0"
+label_settings = SubResource("LabelSettings_h2yge")
+
+[node name="boasorte" parent="." instance=ExtResource("2_0xm2m")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

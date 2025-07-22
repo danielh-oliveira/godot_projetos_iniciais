@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm5cwq1j6lbmd"]
+
+[ext_resource type="Script" uid="uid://btuy5kwx8odk7" path="res://boasorte.gd" id="1_rcxp8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
+bg_color = Color(0.223529, 0.454902, 0.223529, 0.886275)
+
+[node name="boasorte" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rcxp8")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.8
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -261.0
+offset_top = -97.0
+offset_right = 265.0
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0xm2m")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -181.0
+offset_top = -41.5
+offset_right = 181.0
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "BOA SORTE!!"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
