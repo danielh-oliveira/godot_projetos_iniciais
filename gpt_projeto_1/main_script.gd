@@ -3,12 +3,23 @@ extends Node3D
 @onready var camera_3d: Camera3D = $Camera3D
 @onready var viewport = get_viewport()
 @onready var numeros: Label = $"info cliques/numeros"
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var trilha: AudioStreamPlayer = $trilha
 
 var quantidade := 0
-var quantidade_anterior := 0
 var clicou := false
 var aumentou_velocidade := false
+var velocidade_base := 0.3
 var velocidade_atual := 0.3
+
+const tipos_de_miado_inicio := [0.24, 3.05, 5.29, 7.45]
+const tipos_de_miado_final := [1.18, 4.01, 6.25, 8.28]
+var miado_escolhido := 0
+
+# Sistema de progressão de velocidade
+var limites_velocidade := [5, 10, 20, 35, 50, 70, 95, 125, 160, 200]
+var incremento_velocidade := 0.25
+var nivel_velocidade_atual := 0
 
 var cubo = preload("res://cubo.tscn")
 var mensagem_aviso = preload("res://boasorte.tscn")
@@ -16,40 +27,89 @@ var mensagem_aviso = preload("res://boasorte.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	numeros.text = str(quantidade)
+	velocidade_atual = velocidade_base
+	trilha.play(50.50)
+	
+
+func _on_timer_timeout() -> void:
+	adiciona_cubo()
+
+func verifica_aumento_velocidade() -> bool:
+	# Verifica se ainda existem níveis para aumentar
+	if nivel_velocidade_atual >= limites_velocidade.size():
+		return false
+	
+	# Verifica se atingiu o próximo limite
+	var proximo_limite = limites_velocidade[nivel_velocidade_atual]
+	if quantidade >= proximo_limite:
+		nivel_velocidade_atual += 1
+		velocidade_atual += incremento_velocidade
+		return true
+	
+	return false
+
+func adiciona_aviso_velocidade() -> void:
+	var msg_instancia = mensagem_aviso.instantiate()
+	
+	# Vibração tátil para aumentar o feedback
+	# Vibração mais intensa conforme o nível aumenta
+	var duracao_vibracao = min(200 + (nivel_velocidade_atual * 50), 500) # 200ms base + 50ms por nível (máx 500ms)
+	Input.vibrate_handheld(duracao_vibracao)
+	
+	# Mensagem mais informativa baseada no nível
+	match nivel_velocidade_atual:
+		1:
+			msg_instancia.mensagem = "VELOCIDADE +!"
+		2:
+			msg_instancia.mensagem = "MAIS RÁPIDO!"
+		3:
+			msg_instancia.mensagem = "ACELERANDO!"
+		4:
+			msg_instancia.mensagem = "MUITO RÁPIDO!"
+		5:
+			msg_instancia.mensagem = "SUPER VELOCIDADE!"
+		6:
+			msg_instancia.mensagem = "HIPER VELOCIDADE!"
+		7:
+			msg_instancia.mensagem = "MÁXIMA VELOCIDADE!"
+		8:
+			msg_instancia.mensagem = "IMPOSSÍVEL!"
+		_:
+			msg_instancia.mensagem = "INSANO!"
+	
+	add_child(msg_instancia)
+
+func adiciona_cubo() -> void:
 	# Isso garante que cada vez que você rodar o jogo, 
 	# os valores aleatórios sejam realmente diferentes (senão, eles sempre saem igual na primeira vez).
 	randomize()
-		
-func _on_timer_timeout() -> void:
-	adiciona_cubo()
 	
-func adiciona_aviso_velocidade() -> void:
-	var msg_instancia = mensagem_aviso.instantiate()
-	msg_instancia.mensagem = "MAIS RAPIDO!"
-	add_child(msg_instancia)
-	
-func adiciona_cubo() -> void:
 	var cubo_instanciado: Node3D = cubo.instantiate()
 
-	# Altura e profundidade fixas
-	var altura_y = 6.0
-	var profundidade_z = 0.0
-
-	# 1. Gera um ponto aleatório na tela (coordenada X da viewport)
-	var screen_x = randf_range(0, viewport.size.x)
-	var screen_point = Vector2(screen_x, -viewport.size.y)
+	# CORREÇÃO: Método mais direto para posicionamento uniforme
+	# Gera posição X aleatória diretamente no espaço 3D
+	var largura_mundo = 6.0 # Ajuste conforme necessário para sua tela
+	var pos_x = randf_range(-largura_mundo / 2, largura_mundo / 2)
 	
-	# 2. Projeta o ponto para uma posição 3D na altura desejada
-	var world_position = camera_3d.project_position(screen_point, altura_y)
+	# Altura fixa onde os cubos aparecem
+	var altura_y = 8.5
 	
-	if quantidade >= quantidade_anterior + 5:
-		quantidade_anterior = quantidade
-		cubo_instanciado.gravity_scale = velocidade_atual + 0.2
-		velocidade_atual = cubo_instanciado.gravity_scale
+	# Profundidade aleatória
+	var profundidade_z = randf_range(0.0, -10.0)
+	
+	# Ajuste de altura baseado na profundidade (como você tinha)
+	if profundidade_z < -5.0:
+		altura_y += 5.0
+	
+	# Define a posição final
+	var world_position = Vector3(pos_x, altura_y, profundidade_z)
+	
+	if verifica_aumento_velocidade():
 		aumentou_velocidade = true
 		adiciona_aviso_velocidade()
-	else:
-		cubo_instanciado.gravity_scale = velocidade_atual
+	
+	# Define a velocidade do cubo (sempre usa a velocidade atual)
+	cubo_instanciado.gravity_scale = velocidade_atual
 	
 	add_child(cubo_instanciado)
 
@@ -62,13 +122,18 @@ func adiciona_cubo() -> void:
 		randf_range(0, 360),
 		randf_range(0, 360)
 	)
-	
-
 
 func _process(delta: float) -> void:
 	if aumentou_velocidade:
-		pass
-	pass
+		aumentou_velocidade = false # Reset da flag
+
+	if audio_stream_player.playing:
+		if audio_stream_player.get_playback_position() >= tipos_de_miado_final[miado_escolhido]:
+			audio_stream_player.stop()
+			
+	if trilha.get_playback_position() >= 94.0:
+		trilha.stop()
+		trilha.play(20.0)
 
 func _physics_process(delta: float) -> void:
 	if clicou:
@@ -105,6 +170,10 @@ func _physics_process(delta: float) -> void:
 		if result:
 			quantidade += 1
 			numeros.text = str(quantidade)
+			miado_escolhido = randi_range(0, tipos_de_miado_inicio.size() - 1)
+			audio_stream_player.play(tipos_de_miado_inicio[miado_escolhido])
+			audio_stream_player.pitch_scale = randf_range(0.5, 2.5)
+			Input.vibrate_handheld(150, 0.2)
 			result.collider.queue_free()
 			
 func _unhandled_input(event: InputEvent) -> void:

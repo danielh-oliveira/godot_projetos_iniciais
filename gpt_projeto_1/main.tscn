@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://baa5clgtnhwb4"]
+[gd_scene load_steps=10 format=3 uid="uid://baa5clgtnhwb4"]
 
 [ext_resource type="Script" uid="uid://cbva65c2wvafr" path="res://main_script.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bm5cwq1j6lbmd" path="res://boasorte.tscn" id="2_0xm2m"]
+[ext_resource type="AudioStream" uid="uid://cpsg31c0gn1fy" path="res://som/Cat meow sound effect.mp3" id="3_h2yge"]
+[ext_resource type="AudioStream" uid="uid://de6ggv1u4t8ah" path="res://som/trilha.mp3" id="4_1bvp3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_top_color = Color(0.827007, 0.42932, 0.725645, 1)
@@ -17,11 +19,13 @@ background_mode = 2
 sky = SubResource("Sky_ig7tw")
 glow_enabled = true
 
-[sub_resource type="LabelSettings" id="LabelSettings_0xm2m"]
-font_size = 36
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 1
+background_color = Color(1, 0.232763, 0.483847, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_h2yge"]
-font_size = 36
+font_size = 50
+font_color = Color(1, 0.99111, 0.804145, 1)
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_0xm2m")
@@ -36,6 +40,7 @@ environment = SubResource("Environment_0xm2m")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.24149)
+environment = SubResource("Environment_h2yge")
 far = 78.43
 
 [node name="Timer" type="Timer" parent="."]
@@ -44,35 +49,37 @@ autostart = true
 
 [node name="info cliques" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_left = 19.0
-offset_top = 62.0
-offset_right = 59.0
-offset_bottom = 102.0
-
-[node name="Panel" type="Panel" parent="info cliques"]
-layout_mode = 0
-offset_left = -9.0
-offset_top = -7.0
-offset_right = 360.0
-offset_bottom = 66.0
-
-[node name="Label" type="Label" parent="info cliques"]
-layout_mode = 0
-offset_right = 125.0
-offset_bottom = 23.0
-text = "Cubos Clicados: "
-label_settings = SubResource("LabelSettings_0xm2m")
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -95.0
+offset_right = 95.0
+offset_bottom = 92.0
+grow_horizontal = 2
 
 [node name="numeros" type="Label" parent="info cliques"]
-layout_mode = 0
-offset_left = 284.0
-offset_top = 1.0
-offset_right = 347.0
-offset_bottom = 51.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -94.0
+offset_top = 97.0
+offset_right = 94.0
+offset_bottom = 180.0
+grow_horizontal = 2
 text = "0"
 label_settings = SubResource("LabelSettings_h2yge")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="boasorte" parent="." instance=ExtResource("2_0xm2m")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_h2yge")
+volume_db = -38.114
+
+[node name="trilha" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_1bvp3")
+volume_db = -38.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,16 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbt6usd3yo5wk"]
+[gd_scene load_steps=4 format=3 uid="uid://cbt6usd3yo5wk"]
 
 [ext_resource type="Script" uid="uid://wvu65mbbfiet" path="res://menu.gd" id="1_lti8b"]
+[ext_resource type="Texture2D" uid="uid://cbkysr66oyres" path="res://img/fundo2.png" id="2_ouk20"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vsb4k"]
-bg_color = Color(0.76869, 0.265354, 0.480219, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_vsb4k"]
-font_size = 80
-
-[sub_resource type="LabelSettings" id="LabelSettings_lti8b"]
-font_size = 50
-shadow_size = 20
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mae5d"]
+texture = ExtResource("2_ouk20")
+expand_margin_left = 25.0
+expand_margin_top = 10.0
+expand_margin_right = 25.0
+expand_margin_bottom = 10.0
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -28,41 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_vsb4k")
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -299.0
-offset_top = -428.0
-offset_right = 299.0
-offset_bottom = -318.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Como Funciona"
-label_settings = SubResource("LabelSettings_vsb4k")
-
-[node name="Label2" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -313.5
-offset_top = -141.0
-offset_right = 313.5
-offset_bottom = 466.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Clique no maximo de cubos que conseguir. A cada 5 a velocidade aumenta!"
-label_settings = SubResource("LabelSettings_lti8b")
-horizontal_alignment = 1
-autowrap_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_mae5d")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
@@ -71,13 +35,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -157.5
-offset_top = 381.0
-offset_right = 157.5
-offset_bottom = 492.0
+offset_left = -176.0
+offset_top = 245.0
+offset_right = 186.0
+offset_bottom = 357.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
-text = "INICIAR"
+flat = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
