@@ -13,6 +13,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if puff_som.get_playback_position() >= 4.75:
+		puff_som.stop()
+
 	if !animation_player.is_playing():
 		queue_free()
 	pass
