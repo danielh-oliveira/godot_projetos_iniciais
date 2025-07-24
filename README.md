@@ -1,10 +1,8 @@
 # 🎮 Mini Games 3D para Android (Godot 4.3)
-
 Este repositório contém uma coletânea de **mini jogos 3D feitos com Godot 4.3**, voltados para dispositivos **Android**.
 Cada jogo está organizado em sua própria pasta, com o código-fonte completo, cenas, assets e configurações.
 
 ## 📁 Estrutura do Repositório
-
 ```
 /
 ├── toque-nos-cubos = GPT PROJETO 1
@@ -17,86 +15,86 @@ Cada jogo está organizado em sua própria pasta, com o código-fonte completo, 
 ---
 
 ## 🫒 1. Toque nos Cubos
-
-**Tipo:** Jogo de reflexo / tempo
+**Tipo:** Jogo de reflexo / tempo  
 **Descrição:** Toque nos cubos que aparecem na tela antes que desapareçam.
 
-**Técnicas aprendidas:**
+> **📝 Nota de Update:** O jogo começou como cubos caindo e acabou virando um jogo de salvar gatinhos. O projeto não ficou muito bom mas foi ótimo para aprender diversos nodes como os de áudio, animação sprite2D e controles.
 
+### 📷 Screenshots
+<div align="center">
+  <img src="screenshots/cat1.png" width="200" alt="Tela inicial do jogo">
+  <img src="screenshots/cat2.png" width="200" alt="Gameplay - cubos aparecendo">
+  <img src="screenshots/cat3.png" width="200" alt="Jogador tocando nos cubos">
+  <img src="screenshots/cat4.png" width="200" alt="Tela de pontuação">
+</div>
+
+**Técnicas aprendidas:**
 * `InputEventScreenTouch`
 * `RayCast3D` a partir da posição do toque
 * Instanciar e destruir objetos
 * UI com pontuação
 
-**Controles:** Tap (toque simples)
+**Controles:** Tap (toque simples)  
 **Complexidade:** 🟢 Muito fácil
 
 ---
 
 ## 🏃 2. Cubo Corredor
-
-**Tipo:** Endless Runner 3D (estilo Subway Surfers)
+**Tipo:** Endless Runner 3D (estilo Subway Surfers)  
 **Descrição:** Deslize o dedo para desviar de obstáculos enquanto corre.
 
 **Técnicas aprendidas:**
-
 * `CharacterBody3D` com `move_and_slide`
 * Deteccão de gestos (swipe)
 * Obstáculos com colisão
 * Sistema de pontuação por distância
 
-**Controles:** Swipe (arrastar dedo)
+**Controles:** Swipe (arrastar dedo)  
 **Complexidade:** 🟡 Fácil
 
 ---
 
 ## 🧷 3. Cubinho Aventuras
-
-**Tipo:** Plataforma com botões de toque
+**Tipo:** Plataforma com botões de toque  
 **Descrição:** Use botões na tela para mover o personagem, pular e coletar cristais.
 
 **Técnicas aprendidas:**
-
 * `TouchScreenButton` e `Button`
 * Controle de personagem 3D com pulo
 * Coletáveis
 * Checkpoint e reinício da fase
 
-**Controles:** Botões na tela
+**Controles:** Botões na tela  
 **Complexidade:** 🟠 Média
 
 ---
 
 ## 🔫 4. Alvo Cúbico
-
-**Tipo:** Aim & Shoot casual
+**Tipo:** Aim & Shoot casual  
 **Descrição:** Mire com o dedo e o personagem atira automaticamente nos inimigos.
 
 **Técnicas aprendidas:**
-
 * Mira com `InputEventScreenDrag`
 * `RayCast` para mirar
 * Projéteis instanciados
 * Sistema de inimigos com spawn e vida
 
-**Controles:** Drag para mirar
+**Controles:** Drag para mirar  
 **Complexidade:** 🔴 Média/Avançada
 
 ---
 
 ## 🧠 5. Blocos do Santuário
-
-**Tipo:** Puzzle com física (Sokoban 3D)
+**Tipo:** Puzzle com física (Sokoban 3D)  
 **Descrição:** Empurre blocos para resolver puzzles e ativar mecanismos.
 
 **Técnicas aprendidas:**
-
 * `RigidBody3D` com empurrão por toque
 * `Area3D` e sinais de interação
 * Lógica de puzzle com múltiplos estados
 * Finalização de fase ao resolver o enigma
 
-**Controles:** Toque + botão de ação
+**Controles:** Toque + botão de ação  
 **Complexidade:** 🔥 Difícil
 
 ---
@@ -114,30 +112,23 @@ Cada jogo está organizado em sua própria pasta, com o código-fonte completo, 
 ---
 
 ## 🛠️ Requisitos
-
 * **Godot 4.3** (ou superior)
 * Plataforma Android para testes
 
 ---
 
 ## 📅 Como usar
-
 1. Clone este repositório:
-
    ```bash
    git clone https://github.com/seu-usuario/nome-do-repositorio.git
    ```
-
 2. Abra o projeto desejado no Godot:
-
    * Cada pasta contém um mini jogo individual
-
 3. Exporte para Android ou teste no emulador.
 
 ---
 
 ## 📌 Objetivo do Projeto
-
 Este repositório é uma forma de praticar e compartilhar mini jogos 3D para Android usando a engine **Godot**, explorando diferentes tipos de controles e mecânicas interativas.
 
 ---
