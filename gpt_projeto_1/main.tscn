@@ -1,23 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://baa5clgtnhwb4"]
+[gd_scene load_steps=7 format=3 uid="uid://baa5clgtnhwb4"]
 
 [ext_resource type="Script" uid="uid://cbva65c2wvafr" path="res://main_script.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bm5cwq1j6lbmd" path="res://boasorte.tscn" id="2_0xm2m"]
 [ext_resource type="AudioStream" uid="uid://cpsg31c0gn1fy" path="res://som/Cat meow sound effect.mp3" id="3_h2yge"]
 [ext_resource type="AudioStream" uid="uid://de6ggv1u4t8ah" path="res://som/trilha.mp3" id="4_1bvp3"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
-sky_top_color = Color(0.827007, 0.42932, 0.725645, 1)
-sky_horizon_color = Color(0.894118, 0.494118, 0.745098, 1)
-ground_bottom_color = Color(0.894448, 0.494082, 0.742795, 1)
-ground_horizon_color = Color(0.894118, 0.494118, 0.741176, 1)
-
-[sub_resource type="Sky" id="Sky_ig7tw"]
-sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
-
-[sub_resource type="Environment" id="Environment_0xm2m"]
-background_mode = 2
-sky = SubResource("Sky_ig7tw")
-glow_enabled = true
 
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 1
@@ -34,9 +20,6 @@ script = ExtResource("1_0xm2m")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.95739)
 light_energy = 0.8
 directional_shadow_mode = 0
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_0xm2m")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.24149)
@@ -59,15 +42,62 @@ grow_horizontal = 2
 
 [node name="numeros" type="Label" parent="info cliques"]
 layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.647368
+anchor_right = 0.647368
+offset_left = -206.0
+offset_top = 48.0
+offset_right = -81.0
+offset_bottom = 131.0
+grow_horizontal = 2
+text = "0"
+label_settings = SubResource("LabelSettings_h2yge")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="v" type="Label" parent="info cliques"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.347368
+anchor_right = 0.347368
+offset_left = -206.0
+offset_top = 48.0
+offset_right = -81.0
+offset_bottom = 131.0
+grow_horizontal = 2
+text = "😽"
+label_settings = SubResource("LabelSettings_h2yge")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="perdidos" type="Label" parent="info cliques"]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -94.0
-offset_top = 97.0
-offset_right = 94.0
-offset_bottom = 180.0
+offset_left = 113.0
+offset_top = 48.0
+offset_right = 238.0
+offset_bottom = 131.0
 grow_horizontal = 2
 text = "0"
+label_settings = SubResource("LabelSettings_h2yge")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="m" type="Label" parent="info cliques"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 54.0
+offset_top = 51.0
+offset_right = 179.0
+offset_bottom = 134.0
+grow_horizontal = 2
+text = "💀"
 label_settings = SubResource("LabelSettings_h2yge")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -76,10 +106,10 @@ vertical_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_h2yge")
-volume_db = -38.114
+volume_db = -25.0
 
 [node name="trilha" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_1bvp3")
-volume_db = -38.0
+volume_db = -20.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

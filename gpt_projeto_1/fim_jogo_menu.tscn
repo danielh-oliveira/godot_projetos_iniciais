@@ -1,0 +1,142 @@
+[gd_scene load_steps=8 format=3 uid="uid://b0toajsig72qj"]
+
+[ext_resource type="Script" uid="uid://ch3n1nufwa4fa" path="res://fim_jogo_menu.gd" id="1_5tbu0"]
+[ext_resource type="Texture2D" uid="uid://bphqpyswrpn0s" path="res://img/background.png" id="1_dcnjl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dcnjl"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_xek2o"]
+font_size = 70
+
+[sub_resource type="LabelSettings" id="LabelSettings_5tbu0"]
+font_size = 45
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dcnjl"]
+bg_color = Color(0.282353, 0.137255, 0.25098, 1)
+corner_radius_top_left = 90
+corner_radius_top_right = 90
+corner_radius_bottom_right = 90
+corner_radius_bottom_left = 90
+shadow_color = Color(0.203922, 0.105882, 0.203922, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5tbu0"]
+bg_color = Color(0.282353, 0.137255, 0.25098, 1)
+corner_radius_top_left = 90
+corner_radius_top_right = 90
+corner_radius_bottom_right = 90
+corner_radius_bottom_left = 90
+shadow_color = Color(0.203922, 0.105882, 0.203922, 1)
+shadow_offset = Vector2(0, 8)
+
+[node name="FimJogoMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5tbu0")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_dcnjl")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.0
+offset_top = -137.0
+offset_right = 179.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Você conseguiu salvar"
+label_settings = SubResource("LabelSettings_dcnjl")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.0
+offset_top = 69.0
+offset_right = 184.0
+offset_bottom = 141.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "gatinhos!"
+label_settings = SubResource("LabelSettings_dcnjl")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="quantidade_gatinhos" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.0
+offset_top = -39.0
+offset_right = 179.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_xek2o")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -179.0
+offset_top = 45.0
+offset_right = 179.0
+offset_bottom = 132.0
+grow_horizontal = 2
+text = "BOA TENTATIVA!"
+label_settings = SubResource("LabelSettings_5tbu0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button_reset" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.0
+offset_top = 245.0
+offset_right = 188.0
+offset_bottom = 336.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxFlat_dcnjl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5tbu0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_dcnjl")
+text = "TENTAR NOVAMENTE"

@@ -3,10 +3,12 @@ extends Node3D
 @onready var camera_3d: Camera3D = $Camera3D
 @onready var viewport = get_viewport()
 @onready var numeros: Label = $"info cliques/numeros"
+@onready var perdidos: Label = $"info cliques/perdidos"
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var trilha: AudioStreamPlayer = $trilha
 
 var quantidade := 0
+var morte_gatos := 0
 var clicou := false
 var aumentou_velocidade := false
 var velocidade_base := 0.3
@@ -29,8 +31,20 @@ func _ready() -> void:
 	numeros.text = str(quantidade)
 	velocidade_atual = velocidade_base
 	trilha.play(50.50)
-	
 
+func notifica_morte_gato() -> void:
+	morte_gatos += 1
+	perdidos.text = str(morte_gatos)
+		# Escala normal
+	perdidos.scale = Vector2.ONE
+	
+	# Estudar para entender o tween melhor
+	var tween = get_tree().create_tween()
+	# Aumenta suavemente
+	tween.tween_property(perdidos, "scale", Vector2(1.1, 1.1), 0.10).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	# Depois diminui suavemente
+	tween.tween_property(perdidos, "scale", Vector2(1.0, 1.0), 0.10).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	
 func _on_timer_timeout() -> void:
 	adiciona_cubo()
 
@@ -134,6 +148,9 @@ func _process(delta: float) -> void:
 	if trilha.get_playback_position() >= 94.0:
 		trilha.stop()
 		trilha.play(20.0)
+		
+	if morte_gatos >= 10:
+		fim_jogo()
 
 func _physics_process(delta: float) -> void:
 	if clicou:
@@ -170,6 +187,13 @@ func _physics_process(delta: float) -> void:
 		if result:
 			quantidade += 1
 			numeros.text = str(quantidade)
+			
+			var tween = get_tree().create_tween()
+			# Aumenta suavemente
+			tween.tween_property(numeros, "scale", Vector2(1.05, 1.05), 0.10).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+			# Depois diminui suavemente
+			tween.tween_property(numeros, "scale", Vector2(1.0, 1.0), 0.10).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+			
 			miado_escolhido = randi_range(0, tipos_de_miado_inicio.size() - 1)
 			audio_stream_player.play(tipos_de_miado_inicio[miado_escolhido])
 			audio_stream_player.pitch_scale = randf_range(0.5, 2.5)
@@ -180,3 +204,22 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Se for um toque na tela ou clique do mouse
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		clicou = true
+
+func fim_jogo() -> void:
+	var msg_instancia = mensagem_aviso.instantiate()
+	Input.vibrate_handheld(1000)
+	msg_instancia.mensagem = "PERDEU!!"
+	add_child(msg_instancia)
+	trilha.stop()
+	
+	var timer = Timer.new()
+	timer.wait_time = 1.0
+	timer.one_shot = true
+	timer.timeout.connect(_on_timer_final)
+	add_child(timer)
+	timer.start()
+	
+func _on_timer_final() -> void:
+	Global.quantidade_gatos = quantidade
+	var fim_jogo_scene = preload("res://fim_jogo_menu.tscn")
+	get_tree().change_scene_to_packed(fim_jogo_scene)

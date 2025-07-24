@@ -11,10 +11,10 @@ func _ready() -> void:
 	var tween = create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 	
 	# Balanço com rotação
-	tween.tween_property(self, "rotation_degrees", -15, 0.1)
-	tween.tween_property(self, "rotation_degrees", 15, 0.2)
-	tween.tween_property(self, "rotation_degrees", -10, 0.15)
-	tween.tween_property(self, "rotation_degrees", 10, 0.15)
+	tween.tween_property(self, "rotation_degrees", -8, 0.1)
+	tween.tween_property(self, "rotation_degrees", 8, 0.2)
+	tween.tween_property(self, "rotation_degrees", -4, 0.15)
+	tween.tween_property(self, "rotation_degrees", 4, 0.15)
 	tween.tween_property(self, "rotation_degrees", 0, 0.1)
 
 

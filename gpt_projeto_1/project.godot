@@ -13,7 +13,12 @@ config_version=5
 config/name="gpt_projeto_1"
 run/main_scene="uid://cbt6usd3yo5wk"
 config/features=PackedStringArray("4.4", "Mobile")
+boot_splash/image="uid://dsbme4qj3p5t6"
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://global.gd"
 
 [display]
 
