@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0toajsig72qj"]
+[gd_scene load_steps=9 format=3 uid="uid://b0toajsig72qj"]
 
 [ext_resource type="Script" uid="uid://ch3n1nufwa4fa" path="res://fim_jogo_menu.gd" id="1_5tbu0"]
 [ext_resource type="Texture2D" uid="uid://bphqpyswrpn0s" path="res://img/background.png" id="1_dcnjl"]
+[ext_resource type="AudioStream" uid="uid://dff37hb5ihjiu" path="res://som/fail.mp3" id="3_xek2o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dcnjl"]
 font_size = 30
@@ -58,9 +59,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -179.0
-offset_top = -137.0
+offset_top = -101.0
 offset_right = 179.0
-offset_bottom = -65.0
+offset_bottom = -29.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Você conseguiu salvar"
@@ -77,9 +78,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -174.0
-offset_top = 69.0
+offset_top = 32.0
 offset_right = 184.0
-offset_bottom = 141.0
+offset_bottom = 104.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "gatinhos!"
@@ -113,9 +114,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -179.0
-offset_top = 45.0
+offset_top = 74.0
 offset_right = 179.0
-offset_bottom = 132.0
+offset_bottom = 161.0
 grow_horizontal = 2
 text = "BOA TENTATIVA!"
 label_settings = SubResource("LabelSettings_5tbu0")
@@ -130,9 +131,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -188.0
-offset_top = 245.0
+offset_top = 223.0
 offset_right = 188.0
-offset_bottom = 336.0
+offset_bottom = 314.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 30
@@ -140,3 +141,8 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_dcnjl")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_5tbu0")
 theme_override_styles/normal = SubResource("StyleBoxFlat_dcnjl")
 text = "TENTAR NOVAMENTE"
+
+[node name="morreu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xek2o")
+
+[connection signal="pressed" from="Button_reset" to="." method="_on_button_reset_pressed"]

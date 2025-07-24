@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://cr5m8bxchbs8n"]
+
+[ext_resource type="Texture2D" uid="uid://7hruvcn13kra" path="res://img/puff.png" id="1_tdl4x"]
+[ext_resource type="Script" uid="uid://pbhfvoendqw6" path="res://puff_1.gd" id="2_oiyxb"]
+[ext_resource type="AudioStream" uid="uid://bq1kqtijk2u7t" path="res://som/puffs.mp3" id="3_dffub"]
+
+[sub_resource type="Animation" id="Animation_7mycd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.4, 0.4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lquwl"]
+resource_name = "puff_pop"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.133333),
+"transitions": PackedFloat32Array(1.62451, 1.62451, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.5, 0.5), Vector2(0.3, 0.3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0666667, 0.127493),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7mycd"]
+_data = {
+&"RESET": SubResource("Animation_7mycd"),
+&"puff_pop": SubResource("Animation_lquwl")
+}
+
+[node name="puff1" type="Sprite2D"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_tdl4x")
+script = ExtResource("2_oiyxb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7mycd")
+}
+
+[node name="puff_som" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_dffub")
+volume_db = -8.0
+pitch_scale = 1.2

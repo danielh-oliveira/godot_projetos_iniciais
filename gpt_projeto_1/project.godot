@@ -13,7 +13,8 @@ config_version=5
 config/name="gpt_projeto_1"
 run/main_scene="uid://cbt6usd3yo5wk"
 config/features=PackedStringArray("4.4", "Mobile")
-boot_splash/image="uid://dsbme4qj3p5t6"
+boot_splash/bg_color=Color(0.152465, 0.0574029, 0.198929, 1)
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [autoload]
