@@ -10,6 +10,15 @@ font_size = 25
 [sub_resource type="LabelSettings" id="LabelSettings_4hy44"]
 font_size = 35
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mae5d"]
+bg_color = Color(0.282353, 0.137255, 0.25098, 1)
+corner_radius_top_left = 90
+corner_radius_top_right = 90
+corner_radius_bottom_right = 90
+corner_radius_bottom_left = 90
+shadow_color = Color(0.203922, 0.105882, 0.203922, 1)
+shadow_offset = Vector2(0, 8)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ytr4m"]
 bg_color = Color(0.282353, 0.137255, 0.25098, 1)
 corner_radius_top_left = 90
@@ -18,15 +27,6 @@ corner_radius_bottom_right = 90
 corner_radius_bottom_left = 90
 shadow_color = Color(0.203922, 0.105882, 0.203922, 1)
 shadow_size = 1
-shadow_offset = Vector2(0, 8)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mae5d"]
-bg_color = Color(0.282353, 0.137255, 0.25098, 1)
-corner_radius_top_left = 90
-corner_radius_top_right = 90
-corner_radius_bottom_right = 90
-corner_radius_bottom_left = 90
-shadow_color = Color(0.203922, 0.105882, 0.203922, 1)
 shadow_offset = Vector2(0, 8)
 
 [node name="Menu" type="Control"]
@@ -96,6 +96,7 @@ offset_bottom = 295.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 47
+theme_override_styles/focus = SubResource("StyleBoxFlat_mae5d")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ytr4m")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_mae5d")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ytr4m")

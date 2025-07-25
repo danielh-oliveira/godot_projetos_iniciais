@@ -14,6 +14,7 @@ var clicou := false
 var aumentou_velocidade := false
 var velocidade_base := 0.3
 var velocidade_atual := 0.3
+var posicao_toque := Vector2.ZERO
 
 const tipos_de_miado_inicio := [0.24, 3.05, 5.29, 7.45]
 const tipos_de_miado_final := [1.18, 4.01, 6.25, 8.28]
@@ -163,7 +164,8 @@ func _physics_process(delta: float) -> void:
 		var space_state := get_world_3d().direct_space_state
 		
 		# Obtém a posição atual do mouse na janela de visualização (em pixels)
-		var mousepos := get_viewport().get_mouse_position()
+		#var mousepos := get_viewport().get_mouse_position()
+		var mousepos : Vector2 = posicao_toque
 		
 		# Calcula o ponto de ORIGEM do raio no mundo 3D baseado na posição do mouse
 		# (Converte coordenada 2D do mouse para um ponto 3D na câmera)
@@ -209,16 +211,29 @@ func _physics_process(delta: float) -> void:
 			
 			result.collider.queue_free()
 			
-func _unhandled_input(event: InputEvent) -> void:
-	# Se for um toque na tela ou clique do mouse
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		clicou = true
+func _input(event: InputEvent) -> void:
+	if event is InputEventScreenTouch or event is InputEventScreenDrag:
+		clicou = true;
+		posicao_toque = event.position
+	pass
+#func _unhandled_input(event: InputEvent) -> void:
+	## Se for um toque na tela ou clique do mouse
+	#if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		#clicou = true
+	#if event is InputEventScreenDrag and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		#clicou = true
 
 func fim_jogo() -> void:
 	if !mostrou_perdeu:
 		mostrou_perdeu = true
+		
+		# Pausa o jogo
+		get_tree().paused = true
+		
 		var msg_instancia = mensagem_aviso.instantiate()
 		msg_instancia.mensagem = "PERDEU!!"
+		# Define que a mensagem pode processar mesmo com o jogo pausado
+		msg_instancia.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 		add_child(msg_instancia)
 		trilha.stop()
 		
@@ -226,10 +241,16 @@ func fim_jogo() -> void:
 		timer.wait_time = 1.0
 		timer.one_shot = true
 		timer.timeout.connect(_on_timer_final)
+		# Define que o timer pode processar mesmo com o jogo pausado
+		timer.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 		add_child(timer)
 		timer.start()
-	
+
 func _on_timer_final() -> void:
 	Global.quantidade_gatos = quantidade
+	
+	# Despausa o jogo antes de mudar de cena (opcional, mas boa prática)
+	get_tree().paused = false
+	
 	var fim_jogo_scene = preload("res://fim_jogo_menu.tscn")
 	get_tree().change_scene_to_packed(fim_jogo_scene)

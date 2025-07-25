@@ -137,6 +137,7 @@ offset_bottom = 314.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_dcnjl")
 theme_override_styles/hover = SubResource("StyleBoxFlat_dcnjl")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_5tbu0")
 theme_override_styles/normal = SubResource("StyleBoxFlat_dcnjl")
