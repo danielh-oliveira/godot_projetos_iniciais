@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxhf63r8m5tpk"]
+
+[ext_resource type="Script" uid="uid://k51ybxab3eq5" path="res://script/player.gd" id="1_f42by"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f42by"]
+albedo_color = Color(0.999998, 0.999947, 0.71586, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c44ox"]
+radius = 0.4
+height = 1.7
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_f42by")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.790283, 0)
+radius = 0.4
+height = 1.5
+material = SubResource("StandardMaterial3D_f42by")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.775626, 0)
+shape = SubResource("CapsuleShape3D_c44ox")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.813801, 0.581143, 0, -0.581143, 0.813801, 0, 4.47419, 2.85896)

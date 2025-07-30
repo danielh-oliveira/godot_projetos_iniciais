@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://buko3u36icg3k"]
+
+[ext_resource type="PackedScene" uid="uid://bxhf63r8m5tpk" path="res://cena/player.tscn" id="1_8xtic"]
+[ext_resource type="PackedScene" uid="uid://bmsfet3yqo3p5" path="res://cena/obstaculo.tscn" id="2_3tt73"]
+
+[node name="CenaGerente" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.623879, 0.759286, -0.185094, 0, 0.236838, 0.971549, 0.781521, 0.60613, -0.147758, 0, 7.5381, 0)
+light_color = Color(0.998219, 0.972615, 0.958723, 1)
+light_energy = 0.8
+shadow_enabled = true
+directional_shadow_max_distance = 110.0
+
+[node name="Cenario" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Cenario"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.275431, -15.653)
+use_collision = true
+size = Vector3(6, 0.5, 50)
+
+[node name="Player" type="Node3D" parent="."]
+
+[node name="CharacterBody3D" parent="Player" instance=ExtResource("1_8xtic")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59716, 0)
+
+[node name="ObstaculoGerente" type="Node3D" parent="."]
+
+[node name="Obstaculo" parent="ObstaculoGerente" instance=ExtResource("2_3tt73")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.539172, -33.0068)
