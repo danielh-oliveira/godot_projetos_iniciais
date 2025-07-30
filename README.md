@@ -43,6 +43,13 @@ Cada jogo está organizado em sua própria pasta, com o código-fonte completo, 
 **Tipo:** Endless Runner 3D (estilo Subway Surfers)  
 **Descrição:** Deslize o dedo para desviar de obstáculos enquanto corre.
 
+> **📝 Nota de Update:** Está com um bug ao tocar no obstaculo menor. O player começa a se mover na posição Z ao pular depois da colisão.
+
+### 📷 Screenshots
+<div align="center">
+  <img src="screenshots/imagem_2025-07-30_190036524.png" width="450" alt="Gameplay basica do jogo">
+</div>
+
 **Técnicas aprendidas:**
 * `CharacterBody3D` com `move_and_slide`
 * Deteccão de gestos (swipe)
