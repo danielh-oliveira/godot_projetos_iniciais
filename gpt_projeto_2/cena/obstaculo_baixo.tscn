@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dddw8hq6ru0tp"]
+
+[ext_resource type="Script" uid="uid://blswbt7m06qb6" path="res://script/obstaculo.gd" id="1_1ahjt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bwjy8"]
+albedo_color = Color(0.999999, 0.43882, 0.481606, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fdgta"]
+size = Vector3(6.10266, 0.497192, 1)
+
+[node name="Obstaculo" type="StaticBody3D"]
+script = ExtResource("1_1ahjt")
+tipo_do_objeto = 1
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00012207, 0.196565, 0)
+size = Vector3(6.00073, 0.299805, 1)
+material = SubResource("StandardMaterial3D_bwjy8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00445557, 0.320458, 0)
+shape = SubResource("BoxShape3D_fdgta")

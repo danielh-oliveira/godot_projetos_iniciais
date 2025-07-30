@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://buko3u36icg3k"]
+[gd_scene load_steps=7 format=3 uid="uid://buko3u36icg3k"]
 
 [ext_resource type="PackedScene" uid="uid://bxhf63r8m5tpk" path="res://cena/player.tscn" id="1_8xtic"]
+[ext_resource type="Script" uid="uid://csvou5qn3o4a3" path="res://script/main.gd" id="1_mk8v6"]
 [ext_resource type="PackedScene" uid="uid://bmsfet3yqo3p5" path="res://cena/obstaculo.tscn" id="2_3tt73"]
+[ext_resource type="Script" uid="uid://2hsg5mvdukq7" path="res://script/obstaculo_gerente.gd" id="2_7ije6"]
+[ext_resource type="PackedScene" uid="uid://dddw8hq6ru0tp" path="res://cena/obstaculo_baixo.tscn" id="4_y3eto"]
+[ext_resource type="Script" uid="uid://dixd31l4aowuk" path="res://script/tela_gerente.gd" id="5_mk8v6"]
 
 [node name="CenaGerente" type="Node3D"]
+script = ExtResource("1_mk8v6")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.623879, 0.759286, -0.185094, 0, 0.236838, 0.971549, 0.781521, 0.60613, -0.147758, 0, 7.5381, 0)
@@ -15,16 +20,41 @@ directional_shadow_max_distance = 110.0
 [node name="Cenario" type="Node3D" parent="."]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Cenario"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.275431, -15.653)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.283902, -15.653)
 use_collision = true
 size = Vector3(6, 0.5, 50)
 
 [node name="Player" type="Node3D" parent="."]
 
 [node name="CharacterBody3D" parent="Player" instance=ExtResource("1_8xtic")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59716, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0378265, 0)
 
 [node name="ObstaculoGerente" type="Node3D" parent="."]
+script = ExtResource("2_7ije6")
+Obstaculos = Array[PackedScene]([ExtResource("2_3tt73"), ExtResource("4_y3eto"), ExtResource("2_3tt73")])
 
-[node name="Obstaculo" parent="ObstaculoGerente" instance=ExtResource("2_3tt73")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.539172, -33.0068)
+[node name="spawnObstaculo" type="Timer" parent="ObstaculoGerente"]
+wait_time = 1.2
+autostart = true
+
+[node name="tempoVivo" type="Timer" parent="."]
+autostart = true
+
+[node name="TelaGerente" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_mk8v6")
+
+[node name="TempoVivo" type="Label" parent="TelaGerente"]
+layout_mode = 1
+offset_right = 132.0
+offset_bottom = 44.0
+text = "Tempo vivo: "
+
+[connection signal="aumentou_tempo_vivo" from="." to="TelaGerente" method="_on_cena_gerente_aumentou_tempo_vivo"]
+[connection signal="timeout" from="ObstaculoGerente/spawnObstaculo" to="ObstaculoGerente" method="_on_spawn_obstaculo_timeout"]
+[connection signal="timeout" from="tempoVivo" to="." method="_on_tempo_vivo_timeout"]
