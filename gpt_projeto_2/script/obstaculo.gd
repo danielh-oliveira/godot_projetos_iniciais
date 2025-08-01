@@ -5,11 +5,15 @@ class_name Obstaculo
 enum tipo {NORMAL, BAIXO}
 @export var tipo_do_objeto : tipo = tipo.NORMAL
 
-const SPEED = 10.0
+var SPEED = 10
 
-## Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
-	#pass # Replace with function body.
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	SPEED = get_tree().current_scene.velocidade_atual
+
+
+func _on_aumentou_vel(quantidade: int) -> void:
+	SPEED += quantidade
 
 func _process(delta: float) -> void:
 	if position.z > 10:

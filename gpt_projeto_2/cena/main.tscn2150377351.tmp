@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://buko3u36icg3k"]
+[gd_scene load_steps=9 format=3 uid="uid://buko3u36icg3k"]
 
 [ext_resource type="PackedScene" uid="uid://bxhf63r8m5tpk" path="res://cena/player.tscn" id="1_8xtic"]
 [ext_resource type="Script" uid="uid://csvou5qn3o4a3" path="res://script/main.gd" id="1_mk8v6"]
@@ -8,9 +8,6 @@
 [ext_resource type="Script" uid="uid://dixd31l4aowuk" path="res://script/tela_gerente.gd" id="5_mk8v6"]
 [ext_resource type="Script" uid="uid://cdqu6iy6y7637" path="res://script/coin_gerente.gd" id="7_foyax"]
 [ext_resource type="PackedScene" uid="uid://cy8n4f50kt4uu" path="res://cena/coin.tscn" id="8_q2a6g"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_q2a6g"]
-size = Vector3(6, 3, 3.5)
 
 [node name="CenaGerente" type="Node3D"]
 script = ExtResource("1_mk8v6")
@@ -73,17 +70,11 @@ script = ExtResource("7_foyax")
 pegaveis = Array[PackedScene]([ExtResource("8_q2a6g")])
 
 [node name="tempoMoeda" type="Timer" parent="CoinGerente"]
-wait_time = 1.4
+wait_time = 0.7
 autostart = true
-
-[node name="ShapeCast3D" type="ShapeCast3D" parent="CoinGerente"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.62, -35)
-shape = SubResource("BoxShape3D_q2a6g")
 
 [connection signal="aumentou_tempo_vivo" from="." to="TelaGerente" method="_on_cena_gerente_aumentou_tempo_vivo"]
 [connection signal="pegou_moeda" from="." to="TelaGerente" method="_on_cena_gerente_pegou_moeda"]
-[connection signal="nova_linha_livre" from="ObstaculoGerente" to="CoinGerente" method="_on_obstaculo_gerente_nova_linha_livre"]
 [connection signal="timeout" from="ObstaculoGerente/spawnObstaculo" to="ObstaculoGerente" method="_on_spawn_obstaculo_timeout"]
 [connection signal="timeout" from="tempoVivo" to="." method="_on_tempo_vivo_timeout"]
-[connection signal="pegou_moeda" from="CoinGerente" to="." method="_on_coin_gerente_pegou_moeda"]
 [connection signal="timeout" from="CoinGerente/tempoMoeda" to="CoinGerente" method="_on_tempo_moeda_timeout"]

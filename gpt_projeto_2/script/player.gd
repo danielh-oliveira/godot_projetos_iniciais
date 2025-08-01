@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
-
-const SPEED := 8.0
+var SPEED := 8.0
 const JUMP_VELOCITY = 4.5
 
 enum linha {ESQUERDA = -2, MEIO = 0, DIREITA = 2}
@@ -10,7 +9,7 @@ var linha_atual = linha.MEIO
 var linha_desejada := 0.0
 
 func _physics_process(delta: float) -> void:
-	print(position.z) #quando toco no obstaculo baixo e pulo o player começa a ficar com a posição z negativa
+	#print(position.z) #quando toco no obstaculo baixo e pulo o player começa a ficar com a posição z negativa
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
