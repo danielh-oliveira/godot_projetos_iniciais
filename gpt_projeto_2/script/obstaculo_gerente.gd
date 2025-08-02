@@ -1,9 +1,11 @@
 extends Node3D
-const distancia_spawn := -35.0
+const distancia_spawn := -50.0
 @export var Obstaculos : Array[PackedScene] = []
 var posicoes_linha := [2.0, 0.0, -2.0]
 var posicao_livre_atual := 0.0
 var posicao_livre_anterior := -99.0  # Valor inicial que não existe nas posições
+var multiplicador_velocidade := .3
+
 signal nova_linha_livre(linha : int)
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,6 +21,7 @@ func _on_spawn_obstaculo_timeout() -> void:
 		var obstaculo_instanciado = obstaculo.instantiate()
 		add_child(obstaculo_instanciado)
 		obstaculo_instanciado.position = Vector3(0, 0, distancia_spawn)
+		obstaculo_instanciado.SPEED += multiplicador_velocidade + 1 
 	else:
 		var linha_livre : int = randi() % 3
 		
@@ -38,8 +41,14 @@ func _on_spawn_obstaculo_timeout() -> void:
 				var obstaculo_instanciado = obstaculo.instantiate()
 				add_child(obstaculo_instanciado)
 				obstaculo_instanciado.position = Vector3(posicoes_linha[i], 0, distancia_spawn)
+				obstaculo_instanciado.SPEED += multiplicador_velocidade + 1 
+				
 		
 		# Shuffle após usar as posições
 		posicoes_linha.shuffle()
 	
 	helperObjstaculo.queue_free()
+
+
+func _on_cena_gerente_aumentar_multiplicador_velocidade(quant: float) -> void:
+	multiplicador_velocidade += quant

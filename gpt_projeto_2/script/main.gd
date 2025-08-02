@@ -2,41 +2,28 @@ extends Node3D
 
 var tempo_vivo := 0
 var moedas := 0
-var velocidade_atual := 10
+@onready var musiquinha: AudioStreamPlayer = $musiquinha
 
 signal  aumentou_tempo_vivo(tempo : int)
 signal  pegou_moeda(tempo : int)
+signal aumentar_multiplicador_velocidade(quant : float)
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
+	musiquinha.play(5.0)
 
 func _on_tempo_vivo_timeout() -> void:
 	tempo_vivo += 1
 	aumentou_tempo_vivo.emit(tempo_vivo)
-	if tempo_vivo % 10 == 0:
-		velocidade_atual += 3
-		for obstaculo in get_node("ObstaculoGerente").get_children():
-			if obstaculo is Obstaculo:
-				obstaculo.SPEED = velocidade_atual
-		for coin in get_node("CoinGerente").get_children():
-			if coin is Coin:
-				coin.SPEED = velocidade_atual
-		print("aumentando velocidade")
-
-
-
-func _on_coin_body_entered(body: Node3D) -> void:
-	moedas += 1
-	pegou_moeda.emit(moedas)
-
 
 func _on_coin_gerente_pegou_moeda() -> void:
 	moedas += 1
 	pegou_moeda.emit(moedas)
+	if moedas % 5 == 0:
+		aumentar_multiplicador_velocidade.emit(0.5)
+
+
+func _on_character_body_3d_morreu() -> void:
+	GameData.passar_valores(tempo_vivo, moedas)
+	get_tree().paused = true
+	get_tree().change_scene_to_file("res://cena/final.tscn")
+	pass # Replace with function body.

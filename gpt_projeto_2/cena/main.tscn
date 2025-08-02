@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://buko3u36icg3k"]
+[gd_scene load_steps=11 format=3 uid="uid://buko3u36icg3k"]
 
 [ext_resource type="PackedScene" uid="uid://bxhf63r8m5tpk" path="res://cena/player.tscn" id="1_8xtic"]
 [ext_resource type="Script" uid="uid://csvou5qn3o4a3" path="res://script/main.gd" id="1_mk8v6"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dixd31l4aowuk" path="res://script/tela_gerente.gd" id="5_mk8v6"]
 [ext_resource type="Script" uid="uid://cdqu6iy6y7637" path="res://script/coin_gerente.gd" id="7_foyax"]
 [ext_resource type="PackedScene" uid="uid://cy8n4f50kt4uu" path="res://cena/coin.tscn" id="8_q2a6g"]
+[ext_resource type="AudioStream" uid="uid://clet04axb3bae" path="res://som/tema.mp3" id="9_c0jyn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q2a6g"]
 size = Vector3(6, 3, 3.5)
@@ -25,7 +26,7 @@ directional_shadow_max_distance = 110.0
 [node name="Cenario" type="Node3D" parent="."]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Cenario"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.283902, -21.7574)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.283902, -23.0443)
 use_collision = true
 size = Vector3(6, 0.5, 50)
 
@@ -52,6 +53,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
 script = ExtResource("5_mk8v6")
 
 [node name="TempoVivo" type="Label" parent="TelaGerente"]
@@ -62,10 +65,10 @@ text = "Tempo vivo: "
 
 [node name="Moedas" type="Label" parent="TelaGerente"]
 layout_mode = 1
-offset_left = 929.0
-offset_top = 5.0
-offset_right = 1061.0
-offset_bottom = 49.0
+offset_left = 251.0
+offset_top = -1.0
+offset_right = 383.0
+offset_bottom = 43.0
 text = "Moedas:"
 
 [node name="CoinGerente" type="Node3D" parent="."]
@@ -77,11 +80,18 @@ wait_time = 1.4
 autostart = true
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="CoinGerente"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.62, -35)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.62, -49.6831)
 shape = SubResource("BoxShape3D_q2a6g")
 
+[node name="musiquinha" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_c0jyn")
+volume_db = 6.0
+
+[connection signal="aumentar_multiplicador_velocidade" from="." to="ObstaculoGerente" method="_on_cena_gerente_aumentar_multiplicador_velocidade"]
+[connection signal="aumentar_multiplicador_velocidade" from="." to="CoinGerente" method="_on_cena_gerente_aumentar_multiplicador_velocidade"]
 [connection signal="aumentou_tempo_vivo" from="." to="TelaGerente" method="_on_cena_gerente_aumentou_tempo_vivo"]
 [connection signal="pegou_moeda" from="." to="TelaGerente" method="_on_cena_gerente_pegou_moeda"]
+[connection signal="morreu" from="Player/CharacterBody3D" to="." method="_on_character_body_3d_morreu"]
 [connection signal="nova_linha_livre" from="ObstaculoGerente" to="CoinGerente" method="_on_obstaculo_gerente_nova_linha_livre"]
 [connection signal="timeout" from="ObstaculoGerente/spawnObstaculo" to="ObstaculoGerente" method="_on_spawn_obstaculo_timeout"]
 [connection signal="timeout" from="tempoVivo" to="." method="_on_tempo_vivo_timeout"]

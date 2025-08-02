@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxhf63r8m5tpk"]
+[gd_scene load_steps=5 format=3 uid="uid://bxhf63r8m5tpk"]
 
 [ext_resource type="Script" uid="uid://k51ybxab3eq5" path="res://script/player.gd" id="1_f42by"]
 
@@ -8,6 +8,11 @@ albedo_color = Color(0.999998, 0.999947, 0.71586, 1)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c44ox"]
 radius = 0.4
 height = 1.7
+
+[sub_resource type="Environment" id="Environment_f42by"]
+background_mode = 1
+background_color = Color(0, 0.972549, 0.447059, 1)
+background_energy_multiplier = 0.8
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_f42by")
@@ -23,4 +28,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.775626, 0)
 shape = SubResource("CapsuleShape3D_c44ox")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.742339, 0.670025, 0, -0.670025, 0.742339, 0, 4.76819, 2.60983)
+transform = Transform3D(1, 0, 0, 0, 0.677146, 0.735849, 0, -0.735849, 0.677146, 0.0831447, 7.68165, 1.95146)
+environment = SubResource("Environment_f42by")
