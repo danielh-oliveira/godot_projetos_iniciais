@@ -6,6 +6,7 @@ var posicao_livre_atual := 0.0
 var posicao_livre_anterior := -99.0  # Valor inicial que não existe nas posições
 var multiplicador_velocidade := .3
 @onready var spawn_obstaculo: Timer = $spawnObstaculo
+var quantidade_obstaculo_baixo := 0
 
 signal nova_linha_livre(linha : int)
 
@@ -18,12 +19,18 @@ func _on_spawn_obstaculo_timeout() -> void:
 	var obstaculo = Obstaculos[randi() % Obstaculos.size()]
 	var helperObjstaculo = obstaculo.instantiate()
 	
-	if helperObjstaculo.tipo_do_objeto == Obstaculo.tipo.BAIXO:
+	if helperObjstaculo.tipo_do_objeto == Obstaculo.tipo.BAIXO and quantidade_obstaculo_baixo <= 2:
+		quantidade_obstaculo_baixo += 1
 		var obstaculo_instanciado = obstaculo.instantiate()
 		add_child(obstaculo_instanciado)
 		obstaculo_instanciado.position = Vector3(0, 0, distancia_spawn)
 		obstaculo_instanciado.SPEED += multiplicador_velocidade + 1 
 	else:
+		obstaculo = Obstaculos[0]
+		
+		if quantidade_obstaculo_baixo > 2:
+			quantidade_obstaculo_baixo = 0
+
 		var linha_livre : int = randi() % 3
 		
 		# CORREÇÃO: Verificar a posição atual contra a anterior
