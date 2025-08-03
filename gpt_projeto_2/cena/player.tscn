@@ -10,7 +10,6 @@ radius = 0.4
 height = 1.7
 
 [sub_resource type="Environment" id="Environment_f42by"]
-background_mode = 1
 background_color = Color(0, 0.972549, 0.447059, 1)
 background_energy_multiplier = 0.8
 
@@ -30,3 +29,4 @@ shape = SubResource("CapsuleShape3D_c44ox")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.677146, 0.735849, 0, -0.735849, 0.677146, 0.0831447, 7.68165, 1.95146)
 environment = SubResource("Environment_f42by")
+far = 600.0

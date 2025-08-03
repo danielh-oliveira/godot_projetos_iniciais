@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://buko3u36icg3k"]
+[gd_scene load_steps=13 format=3 uid="uid://buko3u36icg3k"]
 
 [ext_resource type="PackedScene" uid="uid://bxhf63r8m5tpk" path="res://cena/player.tscn" id="1_8xtic"]
 [ext_resource type="Script" uid="uid://csvou5qn3o4a3" path="res://script/main.gd" id="1_mk8v6"]
@@ -10,6 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://cy8n4f50kt4uu" path="res://cena/coin.tscn" id="8_q2a6g"]
 [ext_resource type="AudioStream" uid="uid://clet04axb3bae" path="res://som/tema.mp3" id="9_c0jyn"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_c0jyn"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_v6806"]
+font_size = 20
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_q2a6g"]
 size = Vector3(6, 3, 3.5)
 
@@ -20,8 +26,12 @@ script = ExtResource("1_mk8v6")
 transform = Transform3D(-0.623879, 0.759286, -0.185094, 0, 0.236838, 0.971549, 0.781521, 0.60613, -0.147758, 0, 7.5381, 0)
 light_color = Color(0.998219, 0.972615, 0.958723, 1)
 light_energy = 0.8
+light_bake_mode = 0
 shadow_enabled = true
-directional_shadow_max_distance = 110.0
+shadow_blur = 1.505
+directional_shadow_mode = 0
+directional_shadow_fade_start = 0.133
+directional_shadow_max_distance = 11.3
 
 [node name="Cenario" type="Node3D" parent="."]
 
@@ -53,23 +63,31 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 2
-size_flags_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("5_mk8v6")
 
 [node name="TempoVivo" type="Label" parent="TelaGerente"]
 layout_mode = 1
-offset_right = 132.0
-offset_bottom = 44.0
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 141.0
+offset_bottom = 52.0
 text = "Tempo vivo: "
+label_settings = SubResource("LabelSettings_c0jyn")
 
 [node name="Moedas" type="Label" parent="TelaGerente"]
 layout_mode = 1
-offset_left = 251.0
-offset_top = -1.0
-offset_right = 383.0
-offset_bottom = 43.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -155.0
+offset_top = 8.0
+offset_right = -23.0
+offset_bottom = 52.0
+grow_horizontal = 0
 text = "Moedas:"
+label_settings = SubResource("LabelSettings_v6806")
 
 [node name="CoinGerente" type="Node3D" parent="."]
 script = ExtResource("7_foyax")

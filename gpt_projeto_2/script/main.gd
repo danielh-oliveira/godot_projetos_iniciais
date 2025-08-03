@@ -19,7 +19,7 @@ func _on_coin_gerente_pegou_moeda() -> void:
 	moedas += 1
 	pegou_moeda.emit(moedas)
 	if moedas % 5 == 0:
-		aumentar_multiplicador_velocidade.emit(0.5)
+		aumentar_multiplicador_velocidade.emit(2)
 
 
 func _on_character_body_3d_morreu() -> void:

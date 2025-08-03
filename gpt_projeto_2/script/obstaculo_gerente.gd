@@ -5,6 +5,7 @@ var posicoes_linha := [2.0, 0.0, -2.0]
 var posicao_livre_atual := 0.0
 var posicao_livre_anterior := -99.0  # Valor inicial que não existe nas posições
 var multiplicador_velocidade := .3
+@onready var spawn_obstaculo: Timer = $spawnObstaculo
 
 signal nova_linha_livre(linha : int)
 
@@ -52,3 +53,7 @@ func _on_spawn_obstaculo_timeout() -> void:
 
 func _on_cena_gerente_aumentar_multiplicador_velocidade(quant: float) -> void:
 	multiplicador_velocidade += quant
+
+	if spawn_obstaculo.wait_time > .4:
+		spawn_obstaculo.wait_time -= .2
+	

@@ -3,6 +3,7 @@ extends Node3D
 @onready var shape_cast_3d: ShapeCast3D = $ShapeCast3D
 
 @export var pegaveis : Array[PackedScene] = []
+@onready var tempo_moeda: Timer = $tempoMoeda
 
 var distancia_spawn := -35.0
 const posicoes_linha := [2.0, 0.0, -2.0]
@@ -49,4 +50,5 @@ func _on_obstaculo_gerente_nova_linha_livre(linha: int) -> void:
 
 func _on_cena_gerente_aumentar_multiplicador_velocidade(quant: float) -> void:
 	multiplicador_velocidade += quant
-	pass # Replace with function body.
+	if tempo_moeda.wait_time > .4:
+		tempo_moeda.wait_time -= .1
